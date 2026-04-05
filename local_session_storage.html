@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local and Session Storage</title>
+</head>
+<body>
+    <input type="text" id="ProductName" placeholder="Enter product name">
+    <input type="number" id="ProductPrice" placeholder="Enter product price">
+    <button onclick="saveProduct()" id="saveButton">Save Product</button>
+
+<script>
+
+    function showProduct(){
+        let cart = localStorage.getItem('cart');
+        console.log('product cart:', cart);
+
+    }
+
+    function saveProduct(){
+        let cart = localStorage.getItem('cart');
+
+        if(cart){
+            cart = JSON.parse(cart);
+        } else {
+            cart = [];
+        }
+        //initally we have null so we make it empty array and then when we got data we use by parse
+
+        let ProductName =  document.getElementById('ProductName').value;
+        let ProductPrice = document.getElementById('ProductPrice').value;
+
+        let product = {
+            Name : ProductName,
+            Value : ProductPrice
+        }
+        cart.push(product) 
+        //add this product to localstorage
+
+      localStorage.setItem('cart' , JSON.stringify(cart))  // set value in first parameter from second
+
+
+        showProduct()
+    }
+    showProduct()
+</script>
+    
+</body>
+</html>
