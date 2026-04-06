@@ -9,13 +9,26 @@
     <input type="text" id="ProductName" placeholder="Enter product name">
     <input type="number" id="ProductPrice" placeholder="Enter product price">
     <button onclick="saveProduct()" id="saveButton">Save Product</button>
+    <p id ="output"></p>
 
 <script>
 
     function showProduct(){
         let cart = localStorage.getItem('cart');
-        console.log('product cart:', cart);
+        let output = document.getElementById('output');
+        let html = '';
+        if(cart){
+            cart = JSON.parse(cart);
+            
+            cart.forEach(product =>{
+                html += `<p>${product.Name} : ${product.Value}</p>`
+            })
+        } else
+        {
+            html = '<p>No products in cart</p>'
+        } // ADD all data in html variable and then show it in output
 
+        output.innerHTML =html
     }
 
     function saveProduct(){
